@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" />
+      <button onclick="addItem()">Add item</button>
+    </div>
+
+    <ul id="shoppingList"></ul>
+
+    <script>
+      //  holds references to elements
+      var list = document.getElementById("shoppingList");
+      var input = document.getElementById("item");
+      var addButton = document.querySelector("button");
+
+      function addItem() {
+        // saves value of input element
+        var inputValue = input.value;
+
+        // Empty the input element
+        input.value = "";
+
+        // Create new elements
+        var listItem = document.createElement("li");
+        var span = document.createElement("span");
+        var deleteButton = document.createElement("button");
+
+        // Append span and delete button as children of the list item
+        listItem.appendChild(span);
+        listItem.appendChild(deleteButton);
+
+        // Set text content of span to the input element value
+        span.textContent = inputValue;
+
+        // Set text content of the delete button
+        deleteButton.textContent = "Delete";
+
+        // Append the list item as a child of the list
+        list.appendChild(listItem);
+
+        // Attach event handler to the delete button
+        deleteButton.onclick = function () {
+          list.removeChild(listItem);
+        };
+
+        // Focus the input element for the next item
+        input.focus();
+      }
+    </script>
+  </body>
+</html>
